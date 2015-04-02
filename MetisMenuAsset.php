@@ -13,8 +13,17 @@ use yii\web\AssetBundle;
 
 class MetisMenuAsset extends AssetBundle{
 
-    public $sourcePath='';
-    public $depends=[];
-    public $js=[];
-    public $css=[];
+
+    public $sourcePath = '@vendor/bower/metisMenu/dist';
+    public $depends = [
+        'yii\web\JqueryAsset'
+    ];
+    public function init()
+    {
+        $postfix = YII_DEBUG ? '' : '.min';
+        $this->js[] = 'metisMenu' . $postfix . '.js';
+        $this->css[] = 'metisMenu' . $postfix . '.js';
+
+        parent::init();
+    }
 }

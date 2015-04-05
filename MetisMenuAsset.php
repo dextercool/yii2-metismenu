@@ -22,7 +22,7 @@ class MetisMenuAsset extends AssetBundle{
     {
         $postfix = YII_DEBUG ? '' : '.min';
         $this->js[] = 'metisMenu' . $postfix . '.js';
-        $this->css[] = 'metisMenu' . $postfix . '.js';
+        $this->css[] = 'metisMenu' . $postfix . '.css';
 
         parent::init();
     }

@@ -1,6 +1,5 @@
-Metismenu widget
-================
-Metismenu widget
+Metismenu widget (In pipeline)
+==============================
 
 Installation
 ------------

@@ -47,6 +47,7 @@ class MetisMenu extends Menu
 
     /**
      * @var string $badgeTag
+     * This property will be overridden by the `badgeClass` option set in individual menu items via [[items]]
     **/
     public $badgeTag='span';
     /**
@@ -54,7 +55,19 @@ class MetisMenu extends Menu
      * This property will be overridden by the `badgeClass` option set in individual menu items via [[items]]
     **/
     public $badgeClass='badge';
+    /**
+     * @var string|bool $iconTag (if not false - allow quick add icon by name, like ('icon'=>'beer'), otherwise you mast full write full icon html in icon attribute - such as
+     * 'icon'=>'<i class="fa fa-beer"></i>')
+     * This property will be overridden by the `badgeClass` option set in individual menu items via [[items]]
+     **/
+    public $iconTag='i';
 
+    /**
+     * @var string $iconPrefix (may be as "fa fa-", "fa fa-2x fa-", "glyphicon glyphicon-" etc/ - For simplify set icon),
+     * Used only if iconTag not false
+     * This property will be overridden by the `iconPrefix` option set in individual menu items via [[items]]
+     **/
+    public $iconPrefix='fa fa-';
     /**
      * @inheritdoc
      */
@@ -137,8 +150,16 @@ class MetisMenu extends Menu
             if (!isset($item['badge'])) {
                 $item['badge'] = '';
             }else{
-                $badgeClass=isset($item['badgeClass'])?$item['badgeClass']:$this->badgeClass;
-                $item['badge']=Html::tag($this->badgeTag, $item['badge'],['class'=>$badgeClass]);
+                $badgeTag=ArrayHelper::getValue($item,'badgeTag', $this->badgeTag);
+                $badgeClass=ArrayHelper::getValue($item,'badgeClass', $this->badgeClass);
+                $item['badge']=Html::tag($badgeTag, $item['badge'],['class'=>$badgeClass]);
+            }
+            if($item['icon']){
+                $iconTag=ArrayHelper::getValue($item,'iconTag', $this->iconTag);
+                if($iconTag){
+                    $iconPrefix=ArrayHelper::getValue($item,'iconPrefix', $this->iconPrefix);
+                    $item['icon']=Html::tag($iconTag,$item['icon'],$iconPrefix);
+                }
             }
             $encodeLabel = isset($item['encode']) ? $item['encode'] : $this->encodeLabels;
             $items[$i]['label'] = $encodeLabel ? Html::encode($item['label']) : $item['label'];

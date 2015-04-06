@@ -35,4 +35,25 @@ class MetisSidebar extends Widget{
      * @var array $menuOptions = array of Metis-Menu settings (['toggle'=>true, 'encodeLabels'=>true, etc])
      */
     public $menuOptions=[];
+    /**
+     * @var string $wrapTag  main sidebar tag
+     */
+    public  $wrapTag='div';
+    /**
+     * @var array $wrapOptions array of htmlOptions for main sidebar tag
+     */
+    public $wrapOptions=['class'=>'sidebar-nav'];
+
+    public function init(){
+        parent::init();
+        $this->registerJs();
+    }
+
+    public function run(){
+        parent::run();
+    }
+
+    public function registerJs(){
+
+    }
 }

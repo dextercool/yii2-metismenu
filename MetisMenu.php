@@ -54,7 +54,7 @@ class MetisMenu extends Menu
      * @var string $badgeClass (may be as "label label-success")
      * This property will be overridden by the `badgeClass` option set in individual menu items via [[items]]
     **/
-    public $badgeClass='badge';
+    public $badgeClass='badge pull-right';
     /**
      * @var string|bool $iconTag (if not false - allow quick add icon by name, like ('icon'=>'beer'), otherwise you mast full write full icon html in icon attribute - such as
      * 'icon'=>'<i class="fa fa-beer"></i>')
@@ -152,13 +152,13 @@ class MetisMenu extends Menu
             }else{
                 $badgeTag=ArrayHelper::getValue($item,'badgeTag', $this->badgeTag);
                 $badgeClass=ArrayHelper::getValue($item,'badgeClass', $this->badgeClass);
-                $item['badge']=Html::tag($badgeTag, $item['badge'],['class'=>$badgeClass]);
+                $items[$i]['badge']=Html::tag($badgeTag, $item['badge'],['class'=>$badgeClass]);
             }
-            if($item['icon']){
+            if(isset($item['icon'])){
                 $iconTag=ArrayHelper::getValue($item,'iconTag', $this->iconTag);
                 if($iconTag){
                     $iconPrefix=ArrayHelper::getValue($item,'iconPrefix', $this->iconPrefix);
-                    $item['icon']=Html::tag($iconTag,$item['icon'],$iconPrefix);
+                    $items[$i]['icon']=Html::tag($iconTag,'',['class'=>$iconPrefix.$item['icon']]);
                 }
             }
             $encodeLabel = isset($item['encode']) ? $item['encode'] : $this->encodeLabels;
